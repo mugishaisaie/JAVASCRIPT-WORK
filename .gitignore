@@ -1,7 +1,9 @@
-# Ignore assignment instruction files
-/.md
+# Ignore assignment markdown and PDF artifacts
+Assignment*.md
+assignment*.md
+Assignment*.pdf
+assignment*.pdf
 
-
-# Ignore assignment PDFs
-/.pdf
+# Keep project readme tracked
+!README.md
 
