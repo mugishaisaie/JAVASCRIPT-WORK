@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 5 - To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+         background-color: #f0f0f0;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .todo-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* Input area: input field + add button side by side */
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-area input {
+            flex: 1;          /* Take up all remaining space */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-area button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-area button:hover {
+            background-color: #219a52;
+        }
+
+        /* The task list */
+        ul {
+            list-style: none;    /* Remove bullet points */
+            padding: 0;
+        }
+
+        ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Completed task style — strikethrough + gray */
+        ul li.completed {
+            text-decoration: line-through;
+            color: #95a5a6;
+            background-color: #d5dbdb;
+        }
+
+        /* Task text (clickable to toggle complete) */
+        .task-text {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Delete button on each task */
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        
+    </style>
+</head>
+
+
+<body>
+<nav>
+        <a href="Dom.html">DOM Manipulation</a> |
+        <a href="part3.html">Event Handling</a> |
+        <a href="part4.html">Simple Calculator</a> |
+        <a href="part5.html">To-Do List</a>
+</nav>
+
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+
+        <!-- Input area: text field + Add button -->
+        <div class="input-area">
+            <input type="text" id="taskInput" placeholder="Enter a new task...">
+            <button id="addBtn">Add</button>
+        </div>
+
+        <!-- Task list (starts empty — tasks are added dynamically) -->
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        // -------------------------------------------------------
+        // STEP 1: Get references to DOM elements
+        // -------------------------------------------------------
+        const taskInput = document.getElementById("taskInput");
+        const addBtn    = document.getElementById("addBtn");
+        const taskList  = document.getElementById("taskList");
+
+        // -------------------------------------------------------
+        // STEP 2: Function to add a new task
+        // -------------------------------------------------------
+        function addTask() {
+            // Read and trim the input value
+            const taskText = taskInput.value.trim();
+
+            // Validate: don't allow empty tasks
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            // CREATE the <li> element
+            const li = document.createElement("li");
+
+            // CREATE a <span> for the task text
+            // (Clickable — clicking it toggles the "completed" state)
+            const span = document.createElement("span");
+            span.textContent = taskText;
+            span.className = "task-text";
+
+            // BONUS: Click the task text to mark it as completed
+            span.addEventListener("click", function () {
+                li.classList.toggle("completed");
+            });
+
+            // CREATE a delete button for this task
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Remove";
+            deleteBtn.className = "delete-btn";
+
+            // When the delete button is clicked, remove the <li>
+            deleteBtn.addEventListener("click", function () {
+                taskList.removeChild(li);
+            });
+
+            // ASSEMBLE: put the span and button inside the <li>
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+
+            // ADD the <li> to the <ul> (display it on the page)
+            taskList.appendChild(li);
+
+            // CLEAR the input field for the next task
+            taskInput.value = "";
+
+            // FOCUS the input so the user can keep typing
+            taskInput.focus();
+        }
+
+        // -------------------------------------------------------
+        // STEP 3: Attach event listeners
+        // -------------------------------------------------------
+
+        // Click the "Add" button → add the task
+        addBtn.addEventListener("click", addTask);
+
+        // Press "Enter" key inside the input → add the task
+        taskInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                addTask();
+            }
+        });
+    </script>
+
+</body>

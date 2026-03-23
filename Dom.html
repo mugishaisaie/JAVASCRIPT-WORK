@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="Dom.html">DOM Manipulation</a> |
+        <a href="part3.html">Event Handling</a> |
+        <a href="part4.html">Simple Calculator</a> |
+        <a href="part5.html">To-Do List</a>
+    </nav>
+
+    <h1 id="heading">Welcome to my website</h1>
+
+    <button onclick="changeHeading()">Change Heading</button>
+
+    <script>
+            function changeHeading() {
+            const heading = document.getElementById("heading");
+            heading.textContent = "JavaScript is controlling this page!";
+        }
+    </script>
+
+</body>
+</html>
