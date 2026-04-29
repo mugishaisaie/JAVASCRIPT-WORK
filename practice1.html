@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 1 HTML</title>
+</head>
+<body>
+    <h2 id="heading2">JavaScript Is Powerful</h2>
+
+    <button onclick="ChangeText()">click to change text </button>
+
+
+    <!-- Event Listener -->
+     <p id="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, culpa?</p>
+     <button id="button">Add message</button>
+
+
+     <!-- Calculator -->
+
+     <h2>Calculate any Number</h2>
+
+     <h3>Type your Numbers here</h3>
+
+     <label for="num1">Number 1:</label><input type="text" id="num1" placeholder="Enter Number 1" required><br>
+     <label for="num2">Number 2:</label><input type="text" id="num2" placeholder="Enter Number 2" required><br><br>
+
+     <button id="calculate">Calculate</button>
+     <div id="results"></div>
+    <script>
+
+       // Calculator js -->
+
+       const resultsEl = document.getElementById("results");
+       const calculateEl = document.getElementById("calculate");
+
+       calculateEl.addEventListener('click',()=>{
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+
+        //console.log(num1+num2);
+        if(isNaN(num1) || isNaN(num2)){
+            resultsEl.textContent = "Please Enter Numbers Only";
+            return;
+        }
+        const addition = num1 + num2;
+        const subtraction = num1 - num2;
+        const multiplication = num1 * num2;
+        const division = num2 == 0 ? "This is Infinity Please Devide By Number": num1/num2;
+        
+        resultsEl.innerHTML = `
+        <strong> Addition of ${num1} + ${num2} =</strong> ${addition} <br>
+        <strong> Subtraction of ${num1} - ${num2} =</strong> ${subtraction} <br>
+        <strong> Multiplication of ${num1} x ${num2} =</strong> ${multiplication} <br>
+        <strong> Division of ${num1} ÷  ${num2} =</strong> ${division} <br>
+
+        `
+       })
+
+
+       
+
+       // Change text Content -->
+        function ChangeText(){
+            const heading = document.getElementById("heading2");
+            heading.textContent="The Text Have Changed!";
+        }
+
+        // with event Listener 
+
+        const message = document.getElementById("message");
+        const button = document.getElementById("button")
+
+        button.addEventListener('click',()=>{
+            message.textContent="Added By Javascript add Event Listener";
+        })
+    </script>
+</body>
+</html>
